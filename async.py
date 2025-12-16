@@ -209,8 +209,8 @@ async def score_generator_node(state: AgentState) -> dict:
         complexity_level=state['complexity_level']
     )
 
-    # 3. Invoke LLM asynchronously
-    raw_json_output = await llm_score_generator.ainvoke(prompt_value)
+    # 3. Call LLM asynchronously using _acall
+    raw_json_output = await llm_score_generator._acall(prompt_value)
     await llm_score_generator.close()
 
     # 4. Parse JSON and update state
@@ -245,8 +245,8 @@ async def review_generator_node(state: AgentState) -> dict:
         score=state['score']
     )
 
-    # 3. Invoke LLM asynchronously
-    raw_json_output = await llm_review_generator.ainvoke(prompt_value)
+    # 3. Call LLM asynchronously using _acall
+    raw_json_output = await llm_review_generator._acall(prompt_value)
     await llm_review_generator.close()
 
     # 4. Update state with the final review data
